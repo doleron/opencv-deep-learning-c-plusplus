@@ -1,5 +1,8 @@
-# opencv-deep-learning-c-plusplus
+# OpenCV Deep Learning API examples in C++
+
 Examples of Object Classfication and Detection using OpenCV with Deep Learning in C++
+
+![single mode](https://raw.githubusercontent.com/doleron/opencv-deep-learning-c-plusplus/master/outputs/detections.png)
 
 - Classifiers preliminars
 
@@ -33,8 +36,27 @@ Since version 3.1 OpenCV supports Deep Learning first as a contrib feature but t
 
 - The examples in this tutorial
 
-It could be frustrating for some C++ and Java programmers try to learning more about Deep Learning (and OpenCV). The most of tutorial and examples in internet are written in Python. Thus I decided to write down some examples in C++ to help people looking for apply OpenCV and Deep Learning in their projects.
+It could be frustrating for some C++ programmers try to learning more about Deep Learning (and OpenCV) nowadays. The most of tutorial and examples in internet I found are written in Python. Thus I decided to write down some straightforward examples in C++ to help people getting starting to apply OpenCV and Deep Learning in their projects.
 
 The first example is pretty basic and show how to load the GoogleNet Classification Network using Caffe Engine into a single pic classification program. The ideia is to be really plain and easy to read, avoiding to include complex out-of-concern things like Webcam capture or parameter tunning.
 
 The second example is also easy to read and explain how to perform object detection. In object detection it isn't said just WHAT is the object (like in classification) but also WHERE is the object (or objects) in the image. Object detection indeed is not a classification task. To perform it the network use a single-shot detector algorithm but it is done internatly by the framework. The second example use another prebuilt Google network called MobileNet and also uses the Caffe framework.
+
+Disclaimer
+
+OpenCV is a very active project and Deep Learning is eveolves every day. So, be careful to get your environment updated before try to run these examples. My current setup is ready with OpenCV 4.0.0-pre grabbed from the sources. It requires a C++11 at least compatible compiler and I had used the GCC for that.
+There are lot of ways to know what is the OpenCV version running in your environment. Use the following code if you want to use C++ to get it:
+
+```
+int main(int argc, char** argv) {
+    cout << "OpenCV version : " << CV_VERSION << endl;
+    return 0;
+}
+```
+In my setup it outputs:
+
+```
+OpenCV version : 4.0.0-pre
+```
+
+You needn't a IDE to build and run the examples but if you are wondering what is a good option I could recommend you start with Eclipse CDT IDE. Another good option is the Visual Studio Code. OpenCV can be installed in Windows, Linux and OSX. My Suggestion is try a Ubuntu 16.04 OS running inside a virtualization environment like Virtual Box. Look here for instructions how to install OpenCV from sources in Ubuntu: https://github.com/doleron/installopencv3.2ubuntu
