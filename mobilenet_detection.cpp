@@ -66,11 +66,12 @@ int main(int argc, char** argv) {
 			int yRightTop = static_cast<int>(detectionMat.at<float>(i, 6)
 					* image.rows);
 
-			Rect object((int) xLeftBottom, (int) yLeftBottom,
-					(int) (xRightTop - xLeftBottom),
-					(int) (yRightTop - yLeftBottom));
+			Rect boundBox(xLeftBottom, yLeftBottom, (xRightTop - xLeftBottom), (yRightTop - yLeftBottom));
+			Rect headerBox(xLeftBottom, max(0, yLeftBottom - 15), (xRightTop - xLeftBottom), 15);
 
-			rectangle(output, object, Scalar(0, 255, 0), 2);
+			rectangle(output, headerBox, Scalar(0, 255, 0), -1);
+
+			rectangle(output, boundBox, Scalar(0, 255, 0), 2);
 
 			string label = format("%s: %.2f %%", clazz.c_str(), confidence * 100);
 			putText(output, label, Point(xLeftBottom, yLeftBottom),
