@@ -6,9 +6,7 @@
 #include <fstream>
 #include <sstream>
 
-
 using namespace std;
-
 using namespace cv;
 using namespace dnn;
 
@@ -105,7 +103,7 @@ int main(int argc, char** argv) {
 void classIndexWithHigherConfidence(Mat & prob, int *classId, double *confidence) {
 	Point classIdPoint;
 	//reshape the blob to 1x1000 matrix
-	//here this step is just ilustrative since that googlenet probs layer
+	//here this step is just ilustrative since the googlenet probs layer
 	//is 1x1000 already
 	Mat flatProbMat = prob.reshape(1, 1);
 	minMaxLoc(flatProbMat, 0, confidence, 0, &classIdPoint);
