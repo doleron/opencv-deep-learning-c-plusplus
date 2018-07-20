@@ -21,7 +21,7 @@ void loadClassNames(string classNamesFile, vector<string>& classesVector);
 int main(int argc, char** argv) {
 
 	//the image which we want to classify
-	string inputImageFile = "space_shuttle.jpg";
+	string inputImageFile = "images/fighters.jpg";
 
 	//in this example we'll use the googlenet on the caffe framework
     String model = "bvlc_googlenet.caffemodel";
@@ -78,20 +78,23 @@ int main(int argc, char** argv) {
 	double spentTime = spentCycles / cpuFrequence;
 
 	//now the remain work is just to output the results is a friendly way
-	string confidenceMessage = format("Confidence %.3f %%", confidence * 100);
+	string confidenceMessage = format("Confidence %.2f %%", confidence * 100);
 	string performanceMessage = format("Took: %.2f ms", spentTime);
 	cout << clazz << endl;
 	cout << confidenceMessage << endl;
 	cout << performanceMessage << endl;
 
-	Mat output;
-	image.copyTo(output);
+	int outputHeight = image.size().height + 50;
+	int outputWidth = image.size().width;
+	Size outputSize(outputWidth, outputHeight);
+	Mat output(outputSize, image.type());
+	image.copyTo(output(Rect(0, 50, image.cols, image.rows)));
 
-	rectangle(output, Point(5, 5), Point(220, 55), Scalar(0, 255, 255), -1);
+	rectangle(output, Point(0, 0), Point(output.size().width, 50), Scalar(0, 255, 255), -1);
 
-	putText(output, clazz, Point(8, 20), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 0, 0));
-	putText(output, confidenceMessage, Point(8, 35), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 0, 0));
-	putText(output, performanceMessage, Point(8, 50), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 0, 0));
+	putText(output, clazz, Point(3, 15), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 0, 0));
+	putText(output, confidenceMessage, Point(3, 30), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 0, 0));
+	putText(output, performanceMessage, Point(3, 45), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 0, 0));
 
 	imshow("Result", output);
 	waitKey();
